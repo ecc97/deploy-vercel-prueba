@@ -6,7 +6,7 @@ import FooterPage from "../../../components/Footer";
 import Link from "next/link";
 import { useEffect } from "react";
 
-export const DetailsPropiety: React.FC = () => {
+const EditProperty: React.FC = () => {
 
   useEffect(() => {
     // Importar el JavaScript de Bootstrap después del renderizado del cliente
@@ -221,4 +221,4 @@ export const DetailsPropiety: React.FC = () => {
   );
 };
 
-export default DetailsPropiety;
+export default EditProperty;
