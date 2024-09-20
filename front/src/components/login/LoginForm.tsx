@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useState } from "react"
-import { UserData, UserLogin } from "@/interfaces/IDataUser"
+import { UserLogin } from "@/interfaces/IDataUser"
 import Form from "@/components/form/Form"
 import Label from "@/components/ui/Label.ui"
 import Input from "@/components/ui/Input.ui"
@@ -14,7 +14,7 @@ import Link from "next/link"
 import { colors } from "@/app/GlobalStyles"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { login } from "@/api/auth"
-import { validateEmail } from "@/utils/validators"
+// import { validateEmail } from "@/utils/validators"
 
 
 const initialState: UserLogin = {
