@@ -1,7 +1,7 @@
 'use client'
 import React from "react"
 import styled from "styled-components"
-import { colors } from "@/app/GlobalStyles"
+import { colors } from "../../app/GlobalStyles"
 
 interface SelectProps extends StylesProps {
     id: string
@@ -53,7 +53,7 @@ const Select: React.FC<SelectProps> = ({ id, name, value, onChange, disabled, re
             required={required}
             {...styledProps}
         >
-            <option value="" hidden disabled>Seleccionar Rol</option>
+            <option value="" hidden disabled>Seleccionar Rol</option> 
             {options.map((option) => (
                 <option key={option.value} value={option.value}>
                     {option.label}

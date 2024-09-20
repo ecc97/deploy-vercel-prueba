@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import DetailsPropiety from "@/app/pages/details-properties/page";
 import Link from "next/link";
+
 // Breakpoints para responsive
 const breakpoints = {
   mobile: "768px",
@@ -14,7 +14,9 @@ const CardContainer = styled.div`
   height: max-content;
   border-radius: 0.375rem; /* rounded-md */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* shadow-lg shadow-gray-500/50 */
-
+  padding: 0px;
+  margin: 0px;
+  
   @media (max-width: ${breakpoints.mobile}) {
     width: 100%;
     height: auto;
@@ -61,9 +63,22 @@ const Title = styled.h4`
   font-weight: bold;
   padding: 0.5rem; /* pl-5 */
   text-align: center;
+  font-size: 1.25rem; /* Ajustamos el tamaño de la fuente */
   @media (max-width: ${breakpoints.mobile}) {
     text-align: center;
-    font-size: 1.25rem; /* Ajustamos el tamaño de la fuente */
+  }
+`;
+
+const TypeSale = styled.h4`
+  background-color: #003c71; /* bg-[#ffffff58] */
+  padding: 0.25rem 0.5rem; /* p-1 rounded-md */
+  border-radius: 0.375rem; /* rounded-md */
+  font-weight: bold;
+  color: white ;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    text-align: center;
+    font-size: 1.25rem;
   }
 `;
 
@@ -76,14 +91,17 @@ const PriceContainer = styled.div`
   padding: 1rem; /* p-1 */
 
   @media (max-width: ${breakpoints.mobile}) {
-    flex-direction: column;
+    
     align-items: flex-start;
   }
 `;
 
 const Price = styled.p`
   font-weight: bold;
-
+  border: solid white 1px;
+  padding: 0.25rem 0.5rem; /* p-1 rounded-md */
+  border-radius: 0.375rem; 
+  
   @media (max-width: ${breakpoints.mobile}) {
     font-size: 1rem; /* Ajustamos el tamaño de la fuente */
   }
@@ -93,6 +111,7 @@ const PriceValue = styled.p`
   background-color: #ffffff58; /* bg-[#ffffff58] */
   padding: 0.25rem 0.5rem; /* p-1 rounded-md */
   border-radius: 0.375rem; /* rounded-md */
+  font-weight: bold;
 
   @media (max-width: ${breakpoints.mobile}) {
     font-size: 1rem; /* Ajustamos el tamaño de la fuente */
@@ -139,7 +158,7 @@ const Button = styled.button`
   cursor: pointer;
 
   @media (max-width: ${breakpoints.mobile}) {
-    width: 45%; /* Hacemos que el botón ocupe más espacio en móviles */
+    width: 100%; /* Hacemos que el botón ocupe más espacio en móviles */
   }
 
   &:hover {
@@ -154,7 +173,10 @@ const Card: React.FC = () => (
       <Image src="/assets/img/HERO.png" alt="place" />
     </ImageContainer>
     <InfoContainer>
-      <Title>Nombre propiedad</Title>
+      <div className="bg-[#ffffff] flex flex-row justify-center items-center p-1">
+        <Title>Nombre propiedad</Title>
+        <TypeSale>Arrienda</TypeSale>
+      </div>
       <PriceContainer>
         <Price>Precio</Price>
         <PriceValue>2.000.000</PriceValue>
@@ -184,10 +206,10 @@ const Card: React.FC = () => (
             padding: "0.75rem",
           }}
         >
-          <Link href="/pages/details-propieties" className="w-1/3">
+          <Link href="/pages/details-property" className="w-2/6 no-underline">
             <Button>Ver</Button>
           </Link>
-          <Link href="/pages/details-propieties" className="w-1/3">
+          <Link href="/pages/edit-propiety" className="w-2/6 no-underline">
             <Button>Editar</Button>
           </Link>
         </div>

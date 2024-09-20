@@ -2,22 +2,23 @@
 
 import React from "react"
 import { useState } from "react"
-import { UserData } from "@/interfaces/IDataUser"
-import { register } from "@/api/register"
-import Form from "@/components/form/Form"
-import Label from "@/components/ui/Label.ui"
-import Input from "@/components/ui/Input.ui"
-import InputPassword from "@/components/ui/InputPassword.ui"
-import Select from "@/components/ui/Select.ui"
-import Button from "@/components/ui/Button.ui"
-import Loader from "@/components/ui/Loader.ui"
-import { Container, ContainerForm, GroupTitle, InputContent, BackgroundForm } from "@/components/form/styledForm"
+import { UserData } from "../../interfaces/IDataUser"
+import { register } from "../../api/register"
+import Form from "../form/Form"
+import Label from "../ui/Label.ui"
+import Input from "../ui/Input.ui"
+import InputPassword from "../ui/InputPassword.ui"
+import Select from "../ui/Select.ui"
+import Button from "../ui/Button.ui"
+import Loader from "../ui/Loader.ui"
+import { Container, ContainerForm, GroupTitle, InputContent, BackgroundForm } from "../form/styledForm"
 import Link from "next/link"
-import { colors } from "@/app/GlobalStyles"
+import { colors } from "../../app/GlobalStyles"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
-import { alertSuccess } from "@/components/alerts/Alerts.component"
+import { IoMdHome } from "react-icons/io";
+import { alertSuccess } from "../alerts/Alerts.component"
 import { useRouter } from "next/navigation"
-import { validateEmail } from "@/utils/validators"
+import { validateEmail } from "../../utils/validators"
 
 const initialState: UserData = {
     username: "",
@@ -149,6 +150,11 @@ const Register: React.FC = () => {
                     </Button>
                     <p>¿Ya tienes una cuenta? <Link href="/pages/login">Inicia sesión</Link></p>
                 </Form>
+                <p className="message-home">
+                    <Link href='/'>
+                        <span>Volver al inicio</span> <IoMdHome />
+                    </Link>
+                </p>
             </ContainerForm>
             <BackgroundForm />
         </Container>

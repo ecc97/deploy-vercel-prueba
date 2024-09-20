@@ -1,9 +1,10 @@
 "use client";
 
 import styled from "styled-components";
-import Nav from "@/components/Nav";
-import Card from "@/components/Cards";
-import FooterPage from "@/components/Footer";
+import Nav from "../components/Nav";
+import FooterPage from "../components/Footer";
+import Card from "../components/Cards";
+
 //HERO
 const breakpoints = {
   mobile: "768px", // Puedes ajustar el valor según tus necesidades
@@ -20,6 +21,8 @@ const MainSection = styled.section`
   width: 100%;
   height: 100vh;
   display: flex;
+  padding: 0px;
+  margin: 0px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
@@ -28,7 +31,8 @@ const MainSection = styled.section`
   background-size: cover;
 
   @media (max-width: ${breakpoints.mobile}) {
-    height: auto;
+    
+    height: 50vh;
     padding-bottom: 5%;
   }
 `;
@@ -158,7 +162,8 @@ const HomePage: React.FC = () => {
       </MainSection>
       <Titleh3>¿Qué desea realizar hoy?</Titleh3>
       {/*---------------SECTION ICONS CUSTOMERS---------------- */}
-      <section className="section-icon-home h-screen w-100 flex flex-row flex-nowrap justify-around align-around mb-10 mt-10">
+
+      <section className="section-icon-home h-screen w-100 flex flex-row flex-nowrap justify-around align-around mb-10 mt-10 lg:flex-row">
         <div className="h-full w-full object-contain">
           <img
             src="/assets/img/img-icons.jpg"
@@ -171,8 +176,8 @@ const HomePage: React.FC = () => {
           <div className="text-white text-5xl font-bold">
             <h2 className="text-center">Escoge una opción</h2>
           </div>
-          <div className="w-full h-max flex flex-row justify-around items-center p-5">
-            <div className="w-1/4 h-full  flex justify-center items-center flex-col text-center hover:border-2 border-white rounded-lg">
+          <div className="w-full h-max flex flex-col justify-around items-center lg:flex-row p-5">
+            <div className="w-2/6 h-full  flex justify-center items-center flex-col text-center hover:border-2  border-white rounded-lg">
               <img
                 src="/assets/icons/arrendatario.png"
                 alt="arrendatario"
@@ -182,7 +187,7 @@ const HomePage: React.FC = () => {
                 Arrendatario
               </h4>
             </div>
-            <div className="w-1/4 h-full flex justify-center items-center flex-col text-center hover:border-2 border-white rounded-lg">
+            <div className="w-2/6 h-full flex justify-center items-center flex-col text-center hover:border-2 border-white rounded-lg">
               <img
                 src="/assets/icons/arrendamiento.png"
                 alt="arrendador"
@@ -192,7 +197,7 @@ const HomePage: React.FC = () => {
                 Arrendador
               </h4>
             </div>
-            <div className="w-1/4 h-full flex justify-center items-center flex-col text-center hover:border-2 border-white rounded-lg">
+            <div className="w-2/6 h-full flex justify-center items-center flex-col text-center hover:border-2 border-white rounded-lg">
               <img
                 src="/assets/icons/vendedor.png"
                 alt="vendedor"

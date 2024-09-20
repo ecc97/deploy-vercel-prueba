@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "@/app/GlobalStyles";
+import { colors } from "../../app/GlobalStyles"
 
 interface StyledContainerProps {
     display?: string;
@@ -32,6 +32,11 @@ export const ContainerForm = styled.div<{width?: string, height?: string}>`
         padding: 10px;
         border-top: 1px solid ${colors.secondary};
         border-bottom: 1px solid ${colors.secondary};
+    }
+
+    p {
+        text-align: center;
+        color: ${colors.white};
     }
 
     @media (width <= 768px) {

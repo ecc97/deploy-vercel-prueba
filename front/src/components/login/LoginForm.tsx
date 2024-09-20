@@ -2,18 +2,19 @@
 
 import React from "react"
 import { useState } from "react"
-import { UserLogin } from "@/interfaces/IDataUser"
-import Form from "@/components/form/Form"
-import Label from "@/components/ui/Label.ui"
-import Input from "@/components/ui/Input.ui"
-import InputPassword from "@/components/ui/InputPassword.ui"
-import Button from "@/components/ui/Button.ui"
-import Loader from "@/components/ui/Loader.ui"
-import { Container, ContainerForm, InputContent, TextError, BackgroundForm, GroupTitle } from "@/components/form/styledForm"
+import { UserLogin } from "../../interfaces/IDataUser"
+import Form from "../form/Form"
+import Label from "../ui/Label.ui"
+import Input from "../ui/Input.ui"
+import InputPassword from "../ui/InputPassword.ui"
+import Button from "../ui/Button.ui"
+import Loader from "../ui/Loader.ui"
+import { Container, ContainerForm, InputContent, TextError, BackgroundForm, GroupTitle } from "../form/styledForm"
 import Link from "next/link"
-import { colors } from "@/app/GlobalStyles"
+import { colors } from "../../app/GlobalStyles"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
-import { login } from "@/api/auth"
+import { IoMdHome } from "react-icons/io";
+import { login } from "../../api/auth"
 // import { validateEmail } from "@/utils/validators"
 
 
@@ -115,6 +116,11 @@ const Login: React.FC = () => {
                     </Button>
                     <p>¿No tienes una cuenta? <Link href="/pages/register">Registrarse</Link></p>
                 </Form>
+                <p className="message-home">
+                    <Link href='/'>
+                        <span>Volver al inicio</span> <IoMdHome />
+                    </Link>
+                </p>
             </ContainerForm>
             <BackgroundForm />
         </Container>

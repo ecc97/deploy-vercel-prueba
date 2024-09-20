@@ -1,16 +1,18 @@
 "use client";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect } from "react";
 import Nav from "../../../components/Nav";
 import FooterPage from "../../../components/Footer";
 import Link from "next/link";
+import { useEffect } from "react";
 
-const DetailsProperty: React.FC = () => {
+export const DetailsPropiety: React.FC = () => {
+
   useEffect(() => {
     // Importar el JavaScript de Bootstrap después del renderizado del cliente
     require("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
+
 
   return (
     <>
@@ -219,4 +221,4 @@ const DetailsProperty: React.FC = () => {
   );
 };
 
-export default DetailsProperty;
+export default DetailsPropiety;

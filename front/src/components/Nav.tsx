@@ -101,12 +101,12 @@ export const Nav: React.FC = () => {
       </HamburgerButton>
 
       <Menu open={menuOpen}>
-        <Link href="/" passHref>
+        <Link href="/" passHref className="no-underline text-white">
           <MenuItem>Inicio</MenuItem>
         </Link>
         <MenuItem>Servicios</MenuItem>
         <MenuItem>Nosotros</MenuItem>
-        <Link href="/pages/customer" passHref>
+        <Link href="/pages/customer" passHref className="no-underline text-white">
           <MenuItem>Cliente</MenuItem>
         </Link>
       </Menu>
