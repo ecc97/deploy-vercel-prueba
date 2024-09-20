@@ -1,5 +1,5 @@
 import { apiUrl } from "./apiUrl";
-import { UserData, UserLogin } from "@/interfaces/IDataUser";
+import { UserData, UserLogin } from "../interfaces/IDataUser";
 
 export const login = async (userLogin: UserLogin): Promise<UserLogin | null> => {
     try {
