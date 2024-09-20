@@ -7,7 +7,7 @@ import React from "react";
 import FooterPage from "@/components/Footer";
 
 // pages/profile.client.page.tsx
-export const ClientProfilePage: React.FC = () => {
+const ClientProfilePage: React.FC = () => {
   return (
     <div className="flex flex-col h-screen w-screen">
       <div className="bg-[#003C71]">

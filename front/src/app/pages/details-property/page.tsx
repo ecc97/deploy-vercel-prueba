@@ -4,7 +4,7 @@ import { useEffect } from "react"; // Asegúrate de usar useEffect
 import Nav from "@/components/Nav";
 import FooterPage from "@/components/Footer";
 
-export const DetailsPropiety: React.FC = () => {
+const DetailsPropiety: React.FC = () => {
   useEffect(() => {
     // Importar el JavaScript de Bootstrap después del renderizado del cliente
     require("bootstrap/dist/js/bootstrap.bundle.min.js");
