@@ -8,7 +8,7 @@ interface FormProps {
     className?: string    
 }
 
-const Form: React.FC<FormProps> = ({ onSubmit, children, className }) => {
+const Form: React.FC<FormProps> = ({ onSubmit, children }) => {
     return (
         <FormContent onSubmit={onSubmit} color={colors.white}>
             {children}

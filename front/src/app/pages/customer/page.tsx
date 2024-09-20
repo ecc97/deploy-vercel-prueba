@@ -3,7 +3,7 @@
 import Nav from "@/components/Nav";
 import Card from "@/components/Cards";
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import FooterPage from "@/components/Footer";
 
 // pages/profile.client.page.tsx

@@ -106,42 +106,42 @@ const Titleh3 = styled.h3`
   }
 `;
 
-const Services = styled.section`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
+// const Services = styled.section`
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   width: 100%;
 
-  @media (max-width: ${breakpoints.mobile}) {
-    flex-direction: column;
-  }
-`;
+//   @media (max-width: ${breakpoints.mobile}) {
+//     flex-direction: column;
+//   }
+// `;
 
-const IconServices = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 20%;
-  height: 20rem;
-  border: solid 1px #003c71;
+// const IconServices = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 20%;
+//   height: 20rem;
+//   border: solid 1px #003c71;
 
-  @media (max-width: ${breakpoints.mobile}) {
-    width: 80%;
-    margin-bottom: 20px;
-  }
-`;
+//   @media (max-width: ${breakpoints.mobile}) {
+//     width: 80%;
+//     margin-bottom: 20px;
+//   }
+// `;
 
-const ImgIconArrendamiento = styled.img`
-  height: 70%;
-  width: 100%;
-  border: solid 1px #003c71;
+// const ImgIconArrendamiento = styled.img`
+//   height: 70%;
+//   width: 100%;
+//   border: solid 1px #003c71;
 
-  @media (max-width: ${breakpoints.mobile}) {
-    height: auto;
-    width: 100%;
-  }
-`;
+//   @media (max-width: ${breakpoints.mobile}) {
+//     height: auto;
+//     width: 100%;
+//   }
+// `;
 
 const HomePage: React.FC = () => {
   return (

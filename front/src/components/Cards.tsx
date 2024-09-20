@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import DetailsPropiety from "@/app/pages/details-properties/page";
+// import DetailsPropiety from "@/app/pages/details-properties/page";
 import Link from "next/link";
 // Breakpoints para responsive
 const breakpoints = {

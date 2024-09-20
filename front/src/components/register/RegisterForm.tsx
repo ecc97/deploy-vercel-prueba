@@ -61,7 +61,7 @@ const Register: React.FC = () => {
                 console.log("User registered successfully!")
                 console.log(user)
                 alertSuccess("Registrado", "Usuario registrado correctamente!")
-                // router.push('/')
+                router.push('/pages/customer')
                 setUser(initialState)
                 setIsLoading(false)
             }

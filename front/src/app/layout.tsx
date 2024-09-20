@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <StyledComponentsRegistry>
           <ClientLayout>
