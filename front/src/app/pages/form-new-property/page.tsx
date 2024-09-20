@@ -1,10 +1,10 @@
 "use client";
 
-
 import Nav from "../../../components/Nav";
 import FooterPage from "../../../components/Footer";
 import Link from "next/link";
-export const DetailsPropiety: React.FC = () => {
+
+const NewProperty: React.FC = () => {
 
   return (
     <>
@@ -120,4 +120,4 @@ export const DetailsPropiety: React.FC = () => {
   );
 };
 
-export default DetailsPropiety;
+export default NewProperty;

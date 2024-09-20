@@ -52,7 +52,7 @@ const ClientProfilePage: React.FC = () => {
         <Card></Card>
       </section>
       <div className="flex justify-center p-10">
-        <Link href="/pages/form-new-propieties">
+        <Link href="/pages/form-new-property">
           <button className="button-know-home text-[#003C71] rounded-sm shadow-[#003C71]-500/40 border-t-2 border-b-2 border-[#003C71] p-3">
             Agregar Propiedad
           </button>

@@ -5,7 +5,7 @@ import Nav from "../../../components/Nav";
 import FooterPage from "../../../components/Footer";
 import Link from "next/link";
 
-const DetailsPropiety: React.FC = () => {
+const DetailsProperty: React.FC = () => {
   useEffect(() => {
     // Importar el JavaScript de Bootstrap después del renderizado del cliente
     require("bootstrap/dist/js/bootstrap.bundle.min.js");
@@ -218,4 +218,4 @@ const DetailsPropiety: React.FC = () => {
   );
 };
 
-export default DetailsPropiety;
+export default DetailsProperty;
