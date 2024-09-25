@@ -236,11 +236,11 @@ const HomePage: React.FC = () => {
         <div className="section-targets flex flex-col-3 justify-around items-center container-cards h-full w-full gap-40 p-20">
           {/*---------------CONTAINER TARGETS---------------- */}
           {/*---------------CARD 1---------------- */}
-          <Card property={property} />
+          <Card property={property} onDelete={() => {}}/>
           {/*---------------CARD 2---------------- */}
-          <Card property={property} />
+          <Card property={property} onDelete={() => {}}/>
           {/*---------------CARD 3---------------- */}
-          <Card property={property} />
+          <Card property={property} onDelete={() => {}}/>
          
         </div>
         {/*---------------BUTTON MORE TARGETS---------------- */}
