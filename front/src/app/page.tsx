@@ -147,6 +147,16 @@ const Titleh3 = styled.h3`
 //   }
 // `;
 
+const property = {
+  id: "1",
+  location: "Nombre propiedad",
+  price: "2.000.000",
+  rooms: "2",
+  bathrooms: "1",
+  area: "60",
+  type_sale: "Arrienda"
+}
+
 const HomePage: React.FC = () => {
   return (
     <Container>
@@ -226,11 +236,12 @@ const HomePage: React.FC = () => {
         <div className="section-targets flex flex-col-3 justify-around items-center container-cards h-full w-full gap-40 p-20">
           {/*---------------CONTAINER TARGETS---------------- */}
           {/*---------------CARD 1---------------- */}
-          <Card></Card>
+          <Card property={property} />
           {/*---------------CARD 2---------------- */}
-          <Card></Card>
+          <Card property={property} />
           {/*---------------CARD 3---------------- */}
-          <Card></Card>
+          <Card property={property} />
+         
         </div>
         {/*---------------BUTTON MORE TARGETS---------------- */}
         <div className="flex justify-center items-center w-full mt-20">

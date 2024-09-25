@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { PropertyData } from "../types/PropertyData";
+import { deleteProperty } from "../api/properties";
+import Swal from "sweetalert2";
+import { alertSuccess } from "./alerts/Alerts.component";
 
 // Breakpoints para responsive
 const breakpoints = {
@@ -167,55 +171,95 @@ const Button = styled.button`
   }
 `;
 
-const Card: React.FC = () => (
-  <CardContainer>
-    <ImageContainer>
-      <Image src="/assets/img/HERO.png" alt="place" />
-    </ImageContainer>
-    <InfoContainer>
-      <div className="bg-[#ffffff] flex flex-row justify-center items-center p-1">
-        <Title>Nombre propiedad</Title>
-        <TypeSale>Arrienda</TypeSale>
-      </div>
-      <PriceContainer>
-        <Price>Precio</Price>
-        <PriceValue>2.000.000</PriceValue>
-      </PriceContainer>
-      <DetailsContainer>
-        <div className="flex">
-          <Detail>
-            <p className="font-bold ">Habitaciones</p>
-            <p className="p-2 font-bold">2</p>
-          </Detail>
-          <Detail>
-            <p className="font-bold ">Baños</p>
-            <p className="p-2 font-bold">1</p>
-          </Detail>
-          <Detail>
-            <p className="font-bold ">Área</p>
-            <p className="p-2 font-bold">60</p>
-          </Detail>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-            width: "100%",
-            height: "max-content",
-            padding: "0.75rem",
-          }}
-        >
-          <Link href="/pages/details-property" className="w-2/6 no-underline">
-            <Button>Ver</Button>
-          </Link>
-          <Link href="/pages/edit-propiety" className="w-2/6 no-underline">
-            <Button>Editar</Button>
-          </Link>
-        </div>
-      </DetailsContainer>
-    </InfoContainer>
-  </CardContainer>
-);
+interface CardProps {
+  property: PropertyData;
+  userRole?: string;
+  onDelete: () => void;
+}
 
+const Card: React.FC<CardProps> = ({ property, userRole, onDelete }) => {
+
+  const handleDelete = async () => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "No podrás revertir esta acción",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteProperty(String(property.id)); // Llamar a la función que elimina la propiedad
+          alertSuccess("Eliminada", "Propiedad eliminada exitosamente");
+          onDelete(); // Refrescar la lista después de eliminar
+        } catch (error) {
+          console.error("Error eliminando la propiedad:", error);
+          Swal.fire("Error", "Ocurrió un error al eliminar la propiedad", "error");
+        }
+      }
+    });
+  };
+
+  return(
+    <CardContainer>
+      <ImageContainer>
+        <Image src="/assets/img/HERO.png" alt="place" />
+      </ImageContainer>
+      <InfoContainer>
+        <div className="bg-[#ffffff] flex flex-row justify-center items-center p-1">
+          <Title>{property.location}</Title>
+          <TypeSale>{property.type_sale}</TypeSale>
+        </div>
+        <PriceContainer>
+          <Price>Precio</Price>
+          <PriceValue>{property.price}</PriceValue>
+        </PriceContainer>
+        <DetailsContainer>
+          <div className="flex">
+            <Detail>
+              <p className="font-bold ">Habitaciones</p>
+              <p className="p-2 font-bold">{property.rooms}</p>
+            </Detail>
+            <Detail>
+              <p className="font-bold ">Baños</p>
+              <p className="p-2 font-bold">{property.bathrooms}</p>
+            </Detail>
+            <Detail>
+              <p className="font-bold ">Área</p>
+              <p className="p-2 font-bold">{property.area}</p>
+            </Detail>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              width: "100%",
+              height: "max-content",
+              padding: "0.75rem",
+            }}
+          >
+            <Link href={`/pages/details-property/${property.id}`} className="w-2/6 no-underline">
+              <Button>Ver</Button>
+            </Link>
+            {userRole === "admin" || userRole === "client" ? (
+              <Link href={`/pages/edit-property/${property.id}`} className="w-2/6 no-underline">
+                <Button>Editar</Button>
+              </Link>
+            ) : null}
+            {userRole === "admin" ? (
+              <Button onClick={handleDelete} className="w-2/6">
+                Eliminar
+              </Button>
+            ) : null}
+          </div>
+        </DetailsContainer>
+      </InfoContainer>
+    </CardContainer>
+  );
+} 
+  
 export default Card;

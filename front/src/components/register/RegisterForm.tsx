@@ -32,9 +32,9 @@ const Register: React.FC = () => {
     const [error, setError] = useState<string>("")
     const [showPassword, setShowPassword] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    
+
     const router = useRouter()
-    
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target
         setUser((prevState) => ({
@@ -42,7 +42,7 @@ const Register: React.FC = () => {
             [name]: value,
         }))
     }
-    
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setError("")
@@ -53,20 +53,28 @@ const Register: React.FC = () => {
             setIsLoading(false)
             return
         }
-        
+
         try {
             const data = await register(user)
-            
+
             if (data) {
                 console.log("Success:", data)
                 console.log("User registered successfully!")
                 console.log(user)
+                localStorage.setItem("userData", JSON.stringify(data));
                 alertSuccess("Registrado", "Usuario registrado correctamente!")
-                router.push('/pages/customer')
+
+                // Redirigir según el rol del usuario
+                if (data.role === "admin") {
+                    router.push('/pages/admin');
+                } else if (data.role === "client") {
+                    router.push('/pages/customer');
+                }
+
                 setUser(initialState)
                 setIsLoading(false)
             }
-            
+
         } catch (error) {
             console.error("Error:", error)
             setError("Error al registrar usuario")
@@ -93,7 +101,7 @@ const Register: React.FC = () => {
                             required
                         />
                     </InputContent>
-            
+
 
                     <InputContent>
                         <Label label="Correo electrónico" for="email" />
@@ -141,7 +149,7 @@ const Register: React.FC = () => {
                     </InputContent>
 
                     {error && <p className="error-message">{error}</p>}
-                    <Button type="submit" disabled={ user.email === "" || user.username === "" || user.password === "" || user.role === ""} $bgColor={colors.white}>
+                    <Button type="submit" disabled={user.email === "" || user.username === "" || user.password === "" || user.role === ""} $bgColor={colors.white}>
                         {isLoading ? (
                             <Loader />
                         ) : (

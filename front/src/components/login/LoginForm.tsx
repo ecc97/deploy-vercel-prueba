@@ -14,6 +14,7 @@ import Link from "next/link"
 import { colors } from "../../app/GlobalStyles"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { IoMdHome } from "react-icons/io";
+import { useRouter } from "next/navigation"
 import { login } from "../../api/auth"
 // import { validateEmail } from "@/utils/validators"
 
@@ -29,6 +30,8 @@ const Login: React.FC = () => {
     const [error, setError] = useState<string>("")
     const [showPassword, setShowPassword] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+
+    const router = useRouter()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -52,7 +55,14 @@ const Login: React.FC = () => {
                 setError("Credenciales incorrectas")
             } else if (userData.password === user.password) {
                 console.log("Login successfull!")
+                localStorage.setItem("userData", JSON.stringify(userData))
                 setUser(initialState)
+                // Redirigir según el rol del usuario
+                if (userData.role === "admin") {
+                    router.push('/pages/admin');
+                } else if (userData.role === "client") {
+                    router.push('/pages/customer');
+                }
             } else {
                 setError("Contraseña incorrecta")
             }

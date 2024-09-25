@@ -1,16 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createProperty } from "../../../api/properties";
-import { UserData } from "../../../interfaces/IDataUser";
-import { PropertyData } from "../../../types/PropertyData";
-import { alertSuccess } from "../../../components/alerts/Alerts.component";
-import Nav from "../../../components/Nav";
-import FooterPage from "../../../components/Footer";
+import { updateProperty, getPropertyById } from "../../../../api/properties";
+import { UserData } from "../../../../interfaces/IDataUser";
+import { PropertyData } from "../../../../types/PropertyData";
+import { alertSuccess } from "../../../../components/alerts/Alerts.component";
+import Nav from "../../../../components/Nav";
+import InputFile from "../../../../components/ui/InputFile";
+import FooterPage from "../../../../components/Footer";
 import Link from "next/link";
-import { useRouter } from "next/navigation"
-import InputFile from "../../../components/ui/InputFile";
-import { uploadImageToCloudinary } from "../../../utils/uploadImg";
+import { useRouter, useParams } from "next/navigation"
+import { uploadImageToCloudinary } from "../../../../utils/uploadImg";
 
 const initialState: PropertyData = {
   location: "",
@@ -23,27 +23,46 @@ const initialState: PropertyData = {
   id_user: "",
 };
 
-const NewProperty: React.FC = () => {
+const EditProperty: React.FC = () => {
+  const { id: propertyId } = useParams();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [formDataPro, setFormDataPro] = useState<PropertyData>(initialState);
-
+  const [propertyData, setPropertyData] = useState<PropertyData | null>(null);
+  
   const router = useRouter();
 
   //useEffect para verificar si el usuario está autenticado
   useEffect(() => {
     const userLogged = localStorage.getItem("userData");
-
+  
     if (!userLogged) {
       router.push("/");
     } else {
       const parsedUserData: UserData = JSON.parse(userLogged);
       setUserData(parsedUserData);
-      setFormDataPro({
-        ...formDataPro,
-        id_user: parsedUserData.id,
-      });
+      
+  
+      if (propertyId) {
+        getPropertyById(String(propertyId)).then((property) => {
+          if (property) {
+            setPropertyData(property);
+            setFormDataPro({
+              ...formDataPro,
+              ...property,
+              id_user: parsedUserData.id,
+            });
+          }
+        }).catch((error) => {
+          console.error("Error obteniendo la propiedad:", error);
+        });
+      }
     }
-  }, [router]);
+  }, [propertyId, router]);
+
+  const handleImageUpload = async (index: number, file: File) => {
+    const newImages = await uploadImageToCloudinary(file, index, formDataPro.images || []);
+    setFormDataPro(prev => ({ ...prev, images: newImages }));
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -53,22 +72,12 @@ const NewProperty: React.FC = () => {
     });
   };
 
-  const handleImageUpload = async (index: number, file: File) => {
-    const newImages = await uploadImageToCloudinary(file, index, formDataPro.images || []); // Pasa las imágenes actuales
-    setFormDataPro(prev => ({ ...prev, images: newImages })); // Actualiza el estado con el nuevo array de imágenes 
-  };
-
   const handleSubmit = async () => {
     try {
-      const propertyData = {
-        ...formDataPro,
-        images: formDataPro.images || [], 
-      };
-
-      const property = await createProperty(propertyData);
-      if (property) {
-        alertSuccess("Propiedad creada", "La propiedad fue creada exitosamente.");
-        localStorage.setItem("propertyData", JSON.stringify(property))
+      if (propertyData) {
+        const updatedProperty = await updateProperty(String(propertyData.id), formDataPro);
+        alertSuccess("Propiedad actualizada", "La propiedad fue editada exitosamente.");
+        localStorage.setItem("propertyData", JSON.stringify(updatedProperty));
         setFormDataPro(initialState);
         if(userData?.role === "admin") {
           router.push("/pages/admin");
@@ -77,7 +86,7 @@ const NewProperty: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error("Error creando la propiedad:", error);
+      console.error("Error actualizando la propiedad:", error);
     }
   };
 
@@ -92,7 +101,7 @@ const NewProperty: React.FC = () => {
         <Nav></Nav>
       </div>
       <div className="pt-10 pb-10 mt-10 mb-10 w-full border-2 border-b-[#003C71] border-t-[#003C71]">
-        <h3 className="text-5xl text-[#003C71] text-center">Crear Propiedad</h3>
+        <h3 className="text-5xl text-[#003C71] text-center">Editar Propiedad</h3>
       </div>
       {/*--------------BUTTON RETURN---------------- */}
       <div className="p-10 flex justify-center items-center">
@@ -169,13 +178,13 @@ const NewProperty: React.FC = () => {
                   className="border-b-2 border-[#003c71] text-[#003c71] w-full"
                 >
                   <option value="">----</option>
-                  <option value="Arrenda">Arrenda</option>
-                  <option value="Venta">Venta</option>
+                  <option value="arrendador">Arrenda</option>
+                  <option value="arrendatario">Venta</option>
                 </select>
               </div>
               {/* ------------images icons-------- */}
               <div className="flex flex-row justify-around p-3 text-[#003c71] text-sm lg:w-8/12 flex justify-center items-center ">
-                <label className="font-bold">Anexa tus imagenes:</label>
+              <label className="font-bold">Anexa tus imagenes:</label>
                 <div className="flex space-x-2">
                   {formDataPro.images?.map((image, index) => (
                     <div key={index} className="relative">
@@ -201,7 +210,7 @@ const NewProperty: React.FC = () => {
 
           <div className="button-informatio-propiety pt-10 w-full h-full flex justify-center items-center">
             <button onClick={handleSubmit} className="button-know-home text-[#003C71] rounded-sm shadow-[#003C71]-500/40 border-t-2 border-b-2 border-[#003C71] p-3">
-              Agregar
+              Guardar Cambios
             </button>
           </div>
         </div>
@@ -211,4 +220,4 @@ const NewProperty: React.FC = () => {
   );
 };
 
-export default NewProperty;
+export default EditProperty;

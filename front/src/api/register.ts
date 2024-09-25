@@ -3,7 +3,7 @@ import { UserData } from "../interfaces/IDataUser";
 
 export const register = async (user: UserData): Promise<UserData> => {
     try {
-        const response = await fetch(`${apiUrl}/RaicesUrbanas/register`, {
+        const response = await fetch(`${apiUrl}/users`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
